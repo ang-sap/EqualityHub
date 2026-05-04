@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community & Support | EqualityHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>EqualityHub.</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="learn.html">Learn & About</a>
+            <a href="community.html" class="active">Community & Support</a>
+        </nav>
+        <div>
+            <form action="#" method="GET">
+                <input type="text" name="search" placeholder="Search resources...">
+            </form>
+        </div>
+    </header>
+    <main class="container">
+        <section class="page-header">
+            <span class="eyebrow">SDG 5: Gender Equality</span>
+            <h2>Community & Support</h2>
+            <p>A safe space to share. You are not alone, and your feelings are valid.</p>
+        </section>
+        <section class="split-layout">
+            <section class="panel">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid var(--bg-main); padding-bottom: 15px;">
+                    <h3 style="margin: 0; font-size: 24px; color: var(--primary);">Safe Space Forum</h3>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn" style="padding: 10px 20px; font-size: 14px;">+ Share Your Story</button>
+                    </div>
+                </div>
+                <div id="newPostForm" class="panel"
+                    style="display: none; background: #fdf2f2; margin-bottom: 20px; border: 1px dashed var(--accent);">
+                    <h4>How are you feeling today?</h4>
+                    <input type="text" id="postTitle" class="form-control" placeholder="Title for your post..."
+                        style="margin-bottom:10px">
+                    <select id="postCategory" class="form-control" style="margin-bottom:10px">
+                        <option value="Advice Needed">Seeking Support/Advice</option>
+                        <option value="Discussion">General Discussion</option>
+                    </select>
+                    <textarea id="postText" class="form-control" placeholder="It's okay to let it out here..."
+                        style="margin-bottom:10px; height: 100px;"></textarea>
+                    <button class="btn">Post Anonymously</button>
+                </div>
+                <div id="forumFeed" class="forum-feed">
+                    <article class="forum-post" data-category="Discussion">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80"
+                            alt="Avatar" class="avatar">
+                        <div class="post-content" style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <h5 class="post-title">Dealing with unfair roles in group projects</h5>
+                                <span class="reply-toggle"
+                                    style="font-size: 11px; color: var(--accent); cursor: pointer; font-weight: 600;">View
+                                    Support (2)</span>
+                            </div>
+                            <div class="post-meta"><span class="tag">Discussion</span> | Posted by Anonymous | 2 hours
+                                ago</div>
+                            <p style="font-size: 14px; margin: 10px 0 20px 0; color: var(--text-muted);">Why is it
+                                always expected that girls do the documentation and boys do the hands-on science?</p>
+                            <div class="reply-section"
+                                style="background: #fdfcf0; padding: 15px; border-radius: 10px; border-left: 4px solid #f1c40f;">
+                                <div class="replies-container">
+                                    <div class="bot-msg"
+                                        style="font-size: 13px; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #eee;">
+                                        <strong>Peer Support:</strong> That sounds really frustrating. Your skills are
+                                        valuable for more than just documentation!
+                                    </div>
+                                    <div class="bot-msg"
+                                        style="font-size: 13px; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #eee;">
+                                        <strong>KindSoul:</strong> I'm sorry you're feeling this pressure. Have you
+                                        thought about how you'd like to bring it up to them?
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 5px; margin-top: 10px;">
+                                    <input type="text" class="form-control" placeholder="Talk to them..."
+                                        style="padding:8px; font-size:12px;">
+                                    <button class="btn" style="padding: 5px 15px; font-size: 12px;">Reply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <aside>
+                <div class="panel" style="background: #eff6ff; border: none;">
+                    <h4 style="margin-top:0;">Self-Care Reminder</h4>
+                    <p style="font-size: 13px; line-height: 1.5;">Take a deep breath. Your worth is not defined by
+                        others' expectations. You are doing enough.</p>
+                </div>
+                <div class="panel"
+                    style="margin-top: 20px; background: #fff4d6; border-left: 4px solid #f1c40f; padding: 25px;">
+                    <h3 style="margin: 0 0 10px 0; font-size: 18px;">What to do next?</h3>
+                    <ul
+                        style="font-size: 13px; padding-left: 20px; color: var(--text-dark); margin: 0; line-height: 1.6;">
+                        <li><strong>Document it:</strong> Write down exactly what happened, when, and who was involved.
+                        </li>
+                        <li><strong>Speak up safely:</strong> If comfortable, tell the person their behavior is
+                            inappropriate.</li>
+                        <li><strong>Report it:</strong> Use the form below or contact a trusted adult.</li>
+                    </ul>
+                </div>
+                <div class="panel" style="margin-top: 20px;">
+                    <h3 style="margin: 0 0 10px 0; font-size: 20px;">Report an Incident</h3>
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="What happened? (Confidential)" required
+                                style="min-height: 80px;"></textarea>
+                        </div>
+                        <button type="button" class="btn" style="width: 100%;">Submit Privately</button>
+                    </form>
+                </div>
+                <div class="panel" style="margin-top: 20px; padding: 25px;">
+                    <h3 style="margin: 0 0 15px 0; font-size: 18px;">Support Resources</h3>
+                    <ul style="list-style: none; padding: 0; font-size: 13px; margin: 0;">
+                        <li style="margin-bottom: 12px;">📞 <strong>School Counselor:</strong><br> <a
+                                href="mailto:counselor@school.edu"
+                                style="color: var(--primary);">counselor@school.edu</a></li>
+                        <li style="margin-bottom: 12px;">🛡️ <strong>National Equality Hotline:</strong><br>
+                            1-800-EQUALITY</li>
+                        <li>🌐 <strong>Mental Health Support:</strong><br> <a href="#"
+                                style="color: var(--primary);">Visit Help Center</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </section>
+        <section class="panel" style="margin-top: 40px; background: #f8f9fa;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: var(--primary); margin-bottom: 10px;">General Feedback & Contact</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Have suggestions for EqualityHub
+                    or non-urgent questions? We'd love to hear from you. (Please use the secure form above for reporting
+                    incidents).</p>
+            </div>
+            <form style="max-width: 600px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name (Optional)">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Your Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Your feedback or questions..." required
+                        style="min-height: 100px;"></textarea>
+                </div>
+                <button type="button" class="btn" style="width: 100%; background: var(--primary);">Send Message</button>
+            </form>
+        </section>
+    </main>
+    <footer
+        style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <p style="text-align: center; margin-bottom: 15px;">&copy; 2026 EqualityHub | Promoting Gender Equality in
+            Schools</p>
+        <div>
+            <a href="learn.html">About Us</a> |
+            <a href="learn.html">Privacy Policy</a> |
+            <a href="learn.html">Help Center</a>
+        </div>
+    </footer>
+</body>
+
+</html>
