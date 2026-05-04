@@ -26,7 +26,6 @@ p {
     hyphens: auto;
 }
 
-/* --- Header & Navigation --- */
 header {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
@@ -100,7 +99,6 @@ nav a.active::after {
     width: 100%;
 }
 
-/* --- Global Layout --- */
 .container {
     max-width: 1200px;
     margin: 40px auto;
@@ -111,7 +109,6 @@ html {
     scroll-behavior: smooth;
 }
 
-/* --- Hero Section --- */
 .hero {
     position: relative;
     padding: 100px 40px;
@@ -139,7 +136,6 @@ html {
     text-align: center;
 }
 
-/* --- Buttons --- */
 .btn {
     display: inline-block;
     padding: 14px 32px;
@@ -172,7 +168,6 @@ html {
     color: var(--primary);
 }
 
-/* --- Cards & Grids --- */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -215,7 +210,6 @@ html {
     text-align: left;
 }
 
-/* --- Page Headers & Panels --- */
 .page-header {
     text-align: center;
     padding: 60px 20px;
@@ -260,7 +254,6 @@ html {
     margin-top: 0;
 }
 
-/* --- CTA Box --- */
 .cta-box {
     background: white;
     border-radius: 20px;
@@ -291,7 +284,6 @@ html {
     box-shadow: 0 10px 20px rgba(90, 50, 163, 0.3) !important;
 }
 
-/* --- Community Forum --- */
 .forum-post {
     display: flex;
     gap: 20px;
@@ -331,7 +323,6 @@ html {
     font-weight: 600;
 }
 
-/* --- Forms --- */
 .form-group {
     margin-bottom: 20px;
 }
@@ -368,7 +359,6 @@ textarea.form-control {
     min-height: 120px;
 }
 
-/* --- Learn & About Page Specifics --- */
 .learn-page p {
     text-align: left;
     max-width: 850px;
@@ -654,7 +644,6 @@ textarea.form-control {
     font-size: 14px;
 }
 
-/* --- Footer --- */
 footer {
     background-color: #1b263b;
     color: #8d99ae;
@@ -675,7 +664,6 @@ footer a:hover {
     color: var(--accent);
 }
 
-/* --- Responsive Media Queries --- */
 @media (max-width: 900px) {
 
     .info-section,
