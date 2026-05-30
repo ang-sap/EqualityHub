@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | EqualityHub</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
     <link rel="stylesheet" href="style.css">
     <style>
         .admin-header {
@@ -14,7 +15,6 @@
             margin-bottom: 20px;
         }
 
-        /* Metric Cards */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -45,7 +45,6 @@
             font-size: 13px;
         }
 
-        /* Tables */
         .admin-table {
             width: 100%;
             border-collapse: collapse;
@@ -69,7 +68,6 @@
             border-bottom: 2px solid var(--primary-light);
         }
 
-        /* Interactive Elements */
         .status-select {
             padding: 6px;
             border-radius: 8px;
@@ -91,8 +89,6 @@
             color: #f59e0b;
         }
 
-        /* Gold color */
-
         .admin-input {
             width: 100%;
             padding: 8px;
@@ -103,7 +99,6 @@
             font-size: 13px;
         }
 
-        /* Action Buttons */
         .btn-sm {
             padding: 4px 10px;
             border: none;
@@ -133,22 +128,6 @@
             background: #f87171;
             color: white;
         }
-
-        .snippet-btn {
-            background: #e0f2fe;
-            color: #0284c7;
-            border: 1px solid #bae6fd;
-            font-size: 11px;
-            padding: 3px 8px;
-            border-radius: 12px;
-            cursor: pointer;
-            margin: 2px;
-            display: inline-block;
-        }
-
-        .snippet-btn:hover {
-            background: #bae6fd;
-        }
     </style>
 </head>
 
@@ -157,17 +136,15 @@
         <h1>EqualityHub Admin.</h1>
         <nav><a href="index.html">← Back to Site</a></nav>
     </header>
-
     <main class="container">
         <div class="admin-header">
             <div>
                 <h2 style="margin: 0; color: var(--primary);">System Dashboard</h2>
-                <p style="margin: 5px 0 0; color: var(--text-muted);">Manage reports, feedback, and community posts.</p>
+                <p style="margin: 5px 0 0; color: var(--text-muted);"><strong>Authorized Personnel Only:</strong> Use
+                    this dashboard to moderate community discussions, review confidential incident reports, and track
+                    user feedback to maintain a safe campus environment.</p>
             </div>
-            <button class="btn" onclick="clearAllData()"
-                style="background: #ef4444; padding: 10px 20px; font-size: 14px;">Clear All System Data</button>
         </div>
-
         <div class="metrics-grid">
             <div class="metric-card">
                 <h3 id="countReports">0</h3>
@@ -182,7 +159,6 @@
                 <p>Community Posts</p>
             </div>
         </div>
-
         <section class="panel" style="margin-bottom: 40px; padding: 30px;">
             <h3 style="margin-top: 0;">Incident Reports</h3>
             <div style="overflow-x: auto;">
@@ -193,7 +169,7 @@
                             <th width="15%">Date</th>
                             <th width="30%">Details</th>
                             <th width="15%">Status</th>
-                            <th width="25%">Admin Notes</th>
+                            <th width="25%">Internal Notes</th>
                             <th width="10%">Actions</th>
                         </tr>
                     </thead>
@@ -201,7 +177,6 @@
                 </table>
             </div>
         </section>
-
         <section class="panel" style="margin-bottom: 40px; padding: 30px;">
             <h3 style="margin-top: 0;">General Feedback & Messages</h3>
             <div style="overflow-x: auto;">
@@ -212,7 +187,7 @@
                             <th width="20%">User Info</th>
                             <th width="25%">Message</th>
                             <th width="15%">Status</th>
-                            <th width="20%">Admin Reply</th>
+                            <th width="20%">Internal Notes</th>
                             <th width="5%">Actions</th>
                         </tr>
                     </thead>
@@ -220,7 +195,6 @@
                 </table>
             </div>
         </section>
-
         <section class="panel" style="padding: 30px;">
             <h3 style="margin-top: 0; color: #ea580c;">Community Moderation</h3>
             <p style="font-size: 13px; color: var(--text-muted); margin-top: -10px;">Remove inappropriate posts from the
@@ -241,22 +215,23 @@
         </section>
     </main>
 
+    <button id="backToTop" class="btn"
+        style="position: fixed; bottom: 30px; right: 30px; display: none; z-index: 1000; padding: 10px 20px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">↑
+        Top</button>
+
     <script>
-        // --- 1. CORE RENDER FUNCTION ---
         function loadAdminData() {
             let reports = JSON.parse(localStorage.getItem("eh_reports")) || [];
             let feedback = JSON.parse(localStorage.getItem("eh_feedback")) || [];
             let posts = JSON.parse(localStorage.getItem("eh_posts")) || [];
 
-            // Update Metrics
             document.getElementById("countReports").innerText = reports.length;
             document.getElementById("countFeedback").innerText = feedback.length;
             document.getElementById("countPosts").innerText = posts.length;
 
-            // Render Reports
             const reportsTbody = document.getElementById("reportsTableBody");
             if (reports.length === 0) {
-                reportsTbody.innerHTML = "<tr><td colspan='6' style='text-align:center; color:#888;'>No reports submitted yet.</td></tr>";
+                reportsTbody.innerHTML = `<tr><td colspan='6' style='text-align:center; padding: 40px; color:var(--text-muted);'><div style='font-size: 28px; margin-bottom: 10px;'>📋</div><strong>No reports submitted yet.</strong><br>New incidents will appear here.</td></tr>`;
             } else {
                 reportsTbody.innerHTML = reports.map(r => `
                     <tr style="background: ${r.status === 'Resolved' ? '#f0fdf4' : 'transparent'}">
@@ -264,7 +239,7 @@
                             <span class="important-star ${r.important ? 'active' : ''}" onclick="toggleImportant(${r.id})">★</span>
                         </td>
                         <td style="font-size: 12px; color: #666;">${r.date}</td>
-                        <td>${r.details}</td>
+                        <td><strong>${r.type || 'General Report'}</strong><br><span style="color: #555;">${r.details}</span></td>
                         <td>
                             <select class="status-select" onchange="updateItem('reports', ${r.id}, 'status', this.value)">
                                 <option value="Pending" ${r.status === 'Pending' ? 'selected' : ''}>Pending</option>
@@ -272,22 +247,17 @@
                             </select>
                         </td>
                         <td>
-                            <input type="text" id="note-${r.id}" class="admin-input" placeholder="Add an internal note..." value="${r.note || ''}">
+                            <input type="text" id="note-${r.id}" class="admin-input" placeholder="Type internal note..." value="${r.note || ''}">
                             <button class="btn-sm btn-save" onclick="updateItem('reports', ${r.id}, 'note', document.getElementById('note-${r.id}').value)">Save</button>
-                            <br>
-                            <span class="snippet-btn" onclick="insertSnippet('note-${r.id}', 'Issue is being reviewed.')">Reviewing</span>
-                            <span class="snippet-btn" onclick="insertSnippet('note-${r.id}', 'Handled by admin.')">Handled</span>
-                            <span class="snippet-btn" onclick="insertSnippet('note-${r.id}', 'Will investigate further.')">Investigate</span>
                         </td>
                         <td><button class="btn-sm btn-delete" onclick="deleteItem('reports', ${r.id})">Delete</button></td>
                     </tr>
                 `).join('');
             }
 
-            // Render Feedback
             const feedbackTbody = document.getElementById("feedbackTableBody");
             if (feedback.length === 0) {
-                feedbackTbody.innerHTML = "<tr><td colspan='6' style='text-align:center; color:#888;'>No feedback submitted yet.</td></tr>";
+                feedbackTbody.innerHTML = `<tr><td colspan='6' style='text-align:center; padding: 40px; color:var(--text-muted);'><div style='font-size: 28px; margin-bottom: 10px;'>✉️</div><strong>No feedback available.</strong><br>User messages will be displayed here.</td></tr>`;
             } else {
                 feedbackTbody.innerHTML = feedback.map(f => `
                     <tr>
@@ -302,21 +272,17 @@
                             </select>
                         </td>
                         <td>
-                            <input type="text" id="reply-${f.id}" class="admin-input" placeholder="Draft reply..." value="${f.reply || ''}">
-                            <button class="btn-sm btn-save" onclick="updateItem('feedback', ${f.id}, 'reply', document.getElementById('reply-${f.id}').value)">Save Draft</button>
-                            <br>
-                            <span class="snippet-btn" onclick="insertSnippet('reply-${f.id}', 'Thank you for your feedback!')">Thanks</span>
-                            <span class="snippet-btn" onclick="insertSnippet('reply-${f.id}', 'We are working on adding this feature.')">Working on it</span>
+                            <input type="text" id="reply-${f.id}" class="admin-input" placeholder="Type internal note..." value="${f.reply || ''}">
+                            <button class="btn-sm btn-save" onclick="updateItem('feedback', ${f.id}, 'reply', document.getElementById('reply-${f.id}').value)">Save</button>
                         </td>
                         <td><button class="btn-sm btn-delete" onclick="deleteItem('feedback', ${f.id})">Delete</button></td>
                     </tr>
                 `).join('');
             }
 
-            // Render Community Posts
             const postsTbody = document.getElementById("postsTableBody");
             if (posts.length === 0) {
-                postsTbody.innerHTML = "<tr><td colspan='4' style='text-align:center; color:#888;'>No user posts in the forum yet.</td></tr>";
+                postsTbody.innerHTML = `<tr><td colspan='4' style='text-align:center; padding: 40px; color:var(--text-muted);'><div style='font-size: 28px; margin-bottom: 10px;'>💬</div><strong>No community posts available.</strong><br>User forum submissions will appear here for moderation.</td></tr>`;
             } else {
                 postsTbody.innerHTML = posts.map(p => `
                     <tr>
@@ -329,17 +295,14 @@
             }
         }
 
-        // --- 2. LOGIC FUNCTIONS ---
         function updateItem(type, id, field, value) {
             let storageKey = "eh_" + type;
             let data = JSON.parse(localStorage.getItem(storageKey)) || [];
             let index = data.findIndex(item => item.id === id);
-
             if (index !== -1) {
                 data[index][field] = value;
                 localStorage.setItem(storageKey, JSON.stringify(data));
 
-                // Show a quick visual confirmation instead of an annoying alert
                 if (field === 'note' || field === 'reply') {
                     let btn = event.target;
                     let originalText = btn.innerText;
@@ -347,7 +310,7 @@
                     btn.style.background = "#22c55e";
                     setTimeout(() => { btn.innerText = originalText; btn.style.background = ""; }, 1500);
                 } else {
-                    loadAdminData(); // Reload table for status changes
+                    loadAdminData();
                 }
             }
         }
@@ -362,10 +325,6 @@
             }
         }
 
-        function insertSnippet(inputId, text) {
-            document.getElementById(inputId).value = text;
-        }
-
         function deleteItem(type, id) {
             let itemName = type === 'posts' ? 'community post' : type.slice(0, -1);
             if (confirm(`Are you sure you want to permanently delete this ${itemName}?`)) {
@@ -377,16 +336,6 @@
             }
         }
 
-        function clearAllData() {
-            if (confirm("WARNING: Are you sure you want to delete ALL reports, feedback, and forum posts? This cannot be undone.")) {
-                localStorage.removeItem("eh_reports");
-                localStorage.removeItem("eh_feedback");
-                localStorage.removeItem("eh_posts");
-                loadAdminData();
-            }
-        }
-
-        // Run on initial page load
         loadAdminData();
     </script>
 </body>

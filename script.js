@@ -1,21 +1,63 @@
+// --- NEW VIDEO MODAL FUNCTION ---
+function playVideoModal() {
+    const modal = document.getElementById("customModal");
+    if (modal) {
+        document.getElementById("modalTitle").innerText = "Watch: Breaking Biases";
+
+        // Using a reliable local video player
+        document.getElementById("modalMessage").innerHTML = `
+            <div style="aspect-ratio: 16/9; width: 100%;">
+                <video id="localVideoPlayer" width="100%" height="100%" controls autoplay style="border-radius: 8px; background: #000;">
+                    <source src="video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        `;
+        modal.classList.add("active");
+    }
+}
+
 // --- GLOBAL MODAL FUNCTIONS ---
 function showModal(title, message) {
     const modal = document.getElementById("customModal");
     if (modal) {
         document.getElementById("modalTitle").innerText = title;
-        document.getElementById("modalMessage").innerText = message;
+        document.getElementById("modalMessage").innerHTML = message;
         modal.classList.add("active");
     } else {
-        alert(title + "\n\n" + message); // Fallback just in case
+        alert(title + "\n\n" + message);
     }
 }
 
 function closeModal() {
     const modal = document.getElementById("customModal");
-    if (modal) modal.classList.remove("active");
+    if (modal) {
+        modal.classList.remove("active");
+
+        // Clears the video out of the modal after a short delay so the audio stops playing
+        setTimeout(() => {
+            document.getElementById("modalMessage").innerHTML = "Message goes here.";
+        }, 300);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    // --- BACK TO TOP LOGIC ---
+    const backToTopBtn = document.getElementById("backToTop");
+    if (backToTopBtn) {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
+
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
 
     // --- 1. COMMUNITY FORUM LOGIC (Synced with LocalStorage) ---
     const btnShareStory = document.getElementById("btnShareStory");
@@ -36,13 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Remove old dynamic posts so we don't duplicate them on refresh
         document.querySelectorAll('.dynamic-post').forEach(e => e.remove());
-
         let posts = JSON.parse(localStorage.getItem("eh_posts")) || [];
 
         // Reverse array so newest is at the top
         posts.slice().reverse().forEach(p => {
             const newPost = document.createElement("article");
-            newPost.className = "forum-post dynamic-post"; // Added dynamic-post class
+            newPost.className = "forum-post dynamic-post";
             newPost.innerHTML = `
                 <div style="width: 50px; height: 50px; border-radius: 50%; background-color: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px;">A</div>
                 <div class="post-content" style="width: 100%;">
@@ -57,10 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
             `;
-            // Add custom posts above the hardcoded dummy post
-            forumFeed.prepend(newPost);
+            forumFeed.appendChild(newPost);
         });
-
         attachReplyListeners();
     }
 
@@ -80,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let posts = JSON.parse(localStorage.getItem("eh_posts")) || [];
             posts.push({
                 id: Date.now(),
-                date: new Date().toLocaleDateString(), // Shorter date format for posts
+                date: new Date().toLocaleDateString(),
                 title: title,
                 category: category,
                 text: text
@@ -91,7 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("postTitle").value = "";
             document.getElementById("postText").value = "";
             newPostForm.style.display = "none";
-
             renderForumPosts();
         });
     }
@@ -99,8 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Handle Replies
     function attachReplyListeners() {
         const replyBtns = document.querySelectorAll(".reply-btn");
-        replyBtns.forEach(btn => btn.replaceWith(btn.cloneNode(true))); // Remove old listeners
-
+        replyBtns.forEach(btn => btn.replaceWith(btn.cloneNode(true)));
         document.querySelectorAll(".reply-btn").forEach(btn => {
             btn.addEventListener("click", function () {
                 const input = this.previousElementSibling;
@@ -121,18 +158,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize forum posts on page load
     renderForumPosts();
 
-
     // --- 2. INCIDENT REPORT LOGIC ---
     const incidentForm = document.getElementById("incidentForm");
     if (incidentForm) {
         incidentForm.addEventListener("submit", (e) => {
             e.preventDefault();
+            const type = document.getElementById("incidentType").value;
             const details = document.getElementById("incidentDetails").value;
 
             let reports = JSON.parse(localStorage.getItem("eh_reports")) || [];
             reports.push({
                 id: Date.now(),
                 date: new Date().toLocaleString(),
+                type: type,
                 details: details,
                 status: 'Pending',
                 important: false,

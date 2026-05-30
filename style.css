@@ -22,9 +22,6 @@ body {
     background-color: var(--bg-main);
     color: var(--text-dark);
     line-height: 1.7;
-}
-
-p {
     text-align: justify;
     text-justify: inter-word;
     hyphens: auto;
