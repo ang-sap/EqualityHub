@@ -713,7 +713,6 @@ footer a:hover {
     }
 }
 
-/* --- CUSTOM MODAL UI --- */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -765,7 +764,6 @@ footer a:hover {
     text-align: center;
 }
 
-/* Badge styling for Admin Panel */
 .status-badge {
     padding: 5px 10px;
     border-radius: 12px;

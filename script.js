@@ -1,10 +1,8 @@
-// --- NEW VIDEO MODAL FUNCTION ---
 function playVideoModal() {
     const modal = document.getElementById("customModal");
     if (modal) {
         document.getElementById("modalTitle").innerText = "Watch: Breaking Biases";
 
-        // Using a reliable local video player
         document.getElementById("modalMessage").innerHTML = `
             <div style="aspect-ratio: 16/9; width: 100%;">
                 <video id="localVideoPlayer" width="100%" height="100%" controls autoplay style="border-radius: 8px; background: #000;">
@@ -17,7 +15,6 @@ function playVideoModal() {
     }
 }
 
-// --- GLOBAL MODAL FUNCTIONS ---
 function showModal(title, message) {
     const modal = document.getElementById("customModal");
     if (modal) {
@@ -34,7 +31,6 @@ function closeModal() {
     if (modal) {
         modal.classList.remove("active");
 
-        // Clears the video out of the modal after a short delay so the audio stops playing
         setTimeout(() => {
             document.getElementById("modalMessage").innerHTML = "Message goes here.";
         }, 300);
@@ -43,7 +39,6 @@ function closeModal() {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // --- BACK TO TOP LOGIC ---
     const backToTopBtn = document.getElementById("backToTop");
     if (backToTopBtn) {
         window.addEventListener("scroll", () => {
@@ -59,28 +54,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 1. COMMUNITY FORUM LOGIC (Synced with LocalStorage) ---
     const btnShareStory = document.getElementById("btnShareStory");
     const newPostForm = document.getElementById("newPostForm");
     const submitPostBtn = document.getElementById("submitPostBtn");
     const forumFeed = document.getElementById("forumFeed");
 
-    // Toggle Post Form
     if (btnShareStory) {
         btnShareStory.addEventListener("click", () => {
             newPostForm.style.display = newPostForm.style.display === "none" ? "block" : "none";
         });
     }
 
-    // Function to render dynamic posts from LocalStorage
     function renderForumPosts() {
         if (!forumFeed) return;
 
-        // Remove old dynamic posts so we don't duplicate them on refresh
         document.querySelectorAll('.dynamic-post').forEach(e => e.remove());
         let posts = JSON.parse(localStorage.getItem("eh_posts")) || [];
 
-        // Reverse array so newest is at the top
         posts.slice().reverse().forEach(p => {
             const newPost = document.createElement("article");
             newPost.className = "forum-post dynamic-post";
@@ -103,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
         attachReplyListeners();
     }
 
-    // Handle Submitting a New Post
     if (submitPostBtn) {
         submitPostBtn.addEventListener("click", () => {
             const title = document.getElementById("postTitle").value;
@@ -115,7 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Save to LocalStorage
             let posts = JSON.parse(localStorage.getItem("eh_posts")) || [];
             posts.push({
                 id: Date.now(),
@@ -126,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             localStorage.setItem("eh_posts", JSON.stringify(posts));
 
-            // Reset Form and Re-render
             document.getElementById("postTitle").value = "";
             document.getElementById("postText").value = "";
             newPostForm.style.display = "none";
@@ -134,7 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Handle Replies
     function attachReplyListeners() {
         const replyBtns = document.querySelectorAll(".reply-btn");
         replyBtns.forEach(btn => btn.replaceWith(btn.cloneNode(true)));
@@ -155,10 +141,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Initialize forum posts on page load
     renderForumPosts();
 
-    // --- 2. INCIDENT REPORT LOGIC ---
     const incidentForm = document.getElementById("incidentForm");
     if (incidentForm) {
         incidentForm.addEventListener("submit", (e) => {
@@ -183,7 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 3. GENERAL FEEDBACK LOGIC ---
     const feedbackForm = document.getElementById("feedbackForm");
     if (feedbackForm) {
         feedbackForm.addEventListener("submit", (e) => {
