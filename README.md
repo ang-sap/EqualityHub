@@ -23,13 +23,12 @@ The website aims to:
 * Incident Reporting System
 * General Feedback Form
 * Admin Dashboard
-* Back-to-Top Navigation
 * Educational Stories and Videos
 
 ## Technologies Used
 
-* HTML5
-* CSS3
+* HTML
+* CSS
 * JavaScript
 * LocalStorage
 * GitHub
