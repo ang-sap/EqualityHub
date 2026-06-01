@@ -327,7 +327,16 @@
         }
 
         function deleteItem(type, id) {
-            let itemName = type === 'posts' ? 'community post' : type.slice(0, -1);
+            let itemName;
+
+            if (type === 'posts') {
+                itemName = 'community post';
+            } else if (type === 'feedback') {
+                itemName = 'feedback';
+            } else if (type === 'reports') {
+                itemName = 'report';
+            }
+
             if (confirm(`Are you sure you want to permanently delete this ${itemName}?`)) {
                 let storageKey = "eh_" + type;
                 let data = JSON.parse(localStorage.getItem(storageKey)) || [];
