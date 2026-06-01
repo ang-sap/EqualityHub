@@ -6,7 +6,7 @@ function playVideoModal() {
         document.getElementById("modalMessage").innerHTML = `
             <div style="aspect-ratio: 16/9; width: 100%;">
                 <video id="localVideoPlayer" width="100%" height="100%" controls autoplay style="border-radius: 8px; background: #000;">
-                    <source src="video.mp4" type="video/mp4">
+                    <source src="videos/video.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
